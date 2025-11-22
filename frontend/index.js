@@ -4,8 +4,16 @@ const socket = io("http://localhost:3000")
 const user = localStorage.getItem("telepathy_user");
 
 if (!user) {
-    window.location.href = "login.html"; // forces login
+    window.location.href = "login.html"; 
 }
+const msgInput = document.getElementById("msg-input");
+
+msgInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        document.getElementById("send-btn").click(); 
+    }
+});
 
 // const socket = io();
 socket.emit("register", user);
@@ -28,7 +36,7 @@ sendEl.addEventListener("click",()=>{
     chatArea.append(divEl)
     document.getElementById("msg-input").value=""
 })
-// let 
+
 socket.on("online-users",(users)=>{
     const divEl=document.getElementById("users-list")
     divEl.innerHTML=""
@@ -36,6 +44,9 @@ socket.on("online-users",(users)=>{
     const li = document.createElement("div");
     li.className="user-item"
     li.textContent = users[id];
+    li.addEventListener("click",()=>{
+        
+    })
     divEl.appendChild(li);
   }
 })

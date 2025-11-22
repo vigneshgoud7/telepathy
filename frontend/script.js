@@ -1,3 +1,4 @@
+    let inputEl = document.getElementById("username-input");
     let buttonEl=document.getElementById("connect-btn")
     buttonEl.addEventListener("click",()=>{
         const name = document.getElementById("username-input").value.trim();
@@ -9,6 +10,13 @@
                 localStorage.setItem("telepathy_user", name);
         window.location.href="dashboard.html"
     })
+    inputEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        document.getElementById("connect-btn").click(); 
+    }
+});
+
 
 
     // function logout() {
