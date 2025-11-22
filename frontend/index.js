@@ -1,11 +1,23 @@
-const socket = io();
-const user = localStorage.getItem("telepathy_user")
+const socket = io()
+// const user = localStorage.getItem("telepathy_user")
+// const username = localStorage.getItem("telepathy_user")
+const user = localStorage.getItem("telepathy_user");
+
+if (!user) {
+    window.location.href = "login.html"; // forces login
+}
+
+// const socket = io();
+socket.emit("register", user);
+// socket.emit("register", user);
+console.log(user)
 let disConnectBtnEl=document.querySelector("#disconnect-btn")
 disConnectBtnEl.addEventListener("click",()=>{
             localStorage.removeItem("telepathy_user");
 
     window.location.href="login.html";
 })
+
 let sendEl=document.getElementById("send-btn")
 sendEl.addEventListener("click",()=>{
     let message=document.getElementById("msg-input").value.trim()
@@ -16,3 +28,15 @@ sendEl.addEventListener("click",()=>{
     chatArea.append(divEl)
     document.getElementById("msg-input").value=""
 })
+// let 
+socket.on("online-users",(users)=>{
+    const divEl=document.getElementById("users-list")
+    divEl.innerHTML=""
+    for (let id in users) {
+    const li = document.createElement("div");
+    li.className="user-item"
+    li.textContent = users[id];
+    divEl.appendChild(li);
+  }
+})
+
