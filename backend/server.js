@@ -4,6 +4,8 @@ const cors = require("cors");
 const port=3000;
 const express = require('express');
 const { Server } = require('socket.io');
+const path = require("path");
+
 
 const app = express();
 const { createServer } = require('node:http');
@@ -15,6 +17,8 @@ const io = new Server(server);
 // app.get('/', (req, res) => {
 //   res.send('<h1>Hello world</h1>');
 // });
+app.use(express.static(path.join(__dirname, "..", "frontend")));
+
 let onlineUsers={};
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, '..', 'frontend', 'dashboard.html'));

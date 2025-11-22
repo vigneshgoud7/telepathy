@@ -16,4 +16,4 @@ sendEl.addEventListener("click",()=>{
     chatArea.append(divEl)
     document.getElementById("msg-input").value=""
 })
-let 
+// let 
