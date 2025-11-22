@@ -39,6 +39,10 @@ io.on("connection", (socket) => {
 
     io.emit("online-users", onlineUsers);
   });
+  socket.on("disconnect",(username)=>{
+    delete onlineUsers[socket.id]
+    io.emit("online-users",onlineUsers);
+  })
 });
 
 server.listen(3000, () => {
